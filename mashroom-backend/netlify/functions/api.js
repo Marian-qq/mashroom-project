@@ -1,12 +1,10 @@
+import getConnection from '../../src/db.js'
+
 import crypto from 'crypto';
 import cors from 'cors';
 import express, { Router } from 'express';
 import serverless from "serverless-http";
-import dotenv from 'dotenv';
-import mysql from 'mysql2/promise';
 import bodyParser from 'body-parser';
-
-dotenv.config();
 
 const api = express();
 const router = Router();
@@ -41,6 +39,8 @@ const getUser = async (req, res) => {
 
     const connection = await getConnection();
     const [rows] = await connection.query(sql, [tgId]);
+
+    if (connection) connection.release();
     
     return res.status(201).json({ content: rows[0] });
 };
@@ -60,6 +60,8 @@ const createUser = async (req, res) => {
     const sql = "INSERT INTO user (uuid, tg_id, tg_uuid, name, coins, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const connection = await getConnection();
     await connection.query(sql, [uuid, tgId, tgUuid, name, coins, createdAt, updatedAt]);
+
+    if (connection) connection.release();
     
     return res.status(201).json({ message: "User has been created" });
 };
@@ -71,18 +73,10 @@ const addCoins = async (req, res) => {
     
     const connection = await getConnection();
     await connection.query(sql, [tgId]);
+
+    if (connection) connection.release();
     
     return getUser(req, res);
-};
-
-const getConnection = () => {
-    return mysql.createConnection({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE,
-        port: process.env.MYSQL_PORT
-    });
 };
 
 api.use("/.netlify/functions/api", router);
