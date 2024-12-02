@@ -1,0 +1,11 @@
+.main-page{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    background-image: url('../../Images/forest-BG.png');
+    background-size: cover;
+  }
