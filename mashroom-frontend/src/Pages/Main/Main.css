@@ -6,6 +6,7 @@
     flex-direction: column;
     margin: 0;
     padding: 0;
-    background-image: url('../../Images/forest-BG.png');
+    background-image: url('../../Images/main-BG.png');
     background-size: cover;
+    background-position: center;
   }

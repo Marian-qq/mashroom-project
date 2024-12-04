@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react"
-import "./Mushroom.css"
-import { store } from "../../Store/store"
-import { observer } from "mobx-react"
-import axios from "axios"
+import React, { useEffect, useState } from "react";
+import "./Mushroom.css";
+import { store } from "../../Store/store";
+import { observer } from "mobx-react";
+import axios from "axios";
 
-const ADD_COINS_URL = 'https://lovely-cactus-a12d45.netlify.app/.netlify/functions/api/addCoins?tgId=';
+const ADD_COINS_URL = "https://lovely-cactus-a12d45.netlify.app/.netlify/functions/api/addCoins?tgId=";
+const tapsToRequestAmount = 5;
 
 const Mushroom = observer(() => {
   const [scale, setScale] = useState(1); // mushroom scale
   const [isClicked, setIsClicked] = useState(false);
   const [clicks, setClicks] = useState([]); // list of clicks
+  const [tapsToRequest, setTapsToRequest] = useState(0);
 
   const handleClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     if (store.totalEnergy > 0) {
       setIsClicked(true);
       setScale((prevScale) => prevScale + 0.05); // increasing mushroom size
-      //setTotalEnergy(totalEnergy - 1); // using Mobx instead
-      //setTotalClicks(totalClicks + 1); // using Mobx instead
+      setTapsToRequest(tapsToRequest + 1);
       store.setTotalEarnedCoins();
       store.decreaseTotalEnergy();
 
@@ -37,9 +40,12 @@ const Mushroom = observer(() => {
           prevClicks.filter((click) => click.id !== Date.now())
         );
       }, 1000);
-      axios.post(
-         `${ADD_COINS_URL}${store.user.tg_id}`
-      );
+
+      // api call each 5 taps
+      if (tapsToRequestAmount === tapsToRequest) {
+        axios.post(`${ADD_COINS_URL}${store.user.tg_id}`);
+        setTapsToRequest(0);
+      }
     }
   };
 
@@ -50,35 +56,26 @@ const Mushroom = observer(() => {
     if (!isClicked && scale > 1) {
       timer = setTimeout(() => {
         setScale((prevScale) => (prevScale > 1 ? prevScale - 0.01 : 1));
-      }, 50); 
+      }, 50);
     }
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, [scale, isClicked]);
 
   useEffect(() => {
     if (isClicked) {
       const clickResetTimer = setTimeout(() => {
-        setIsClicked(false); 
+        setIsClicked(false);
       }, 300);
 
-      return () => clearTimeout(clickResetTimer); 
+      return () => clearTimeout(clickResetTimer);
     }
   }, [isClicked]);
-
-
-  // useEffect(() => {
-  //   const maxEnergy = 15;
-  //   const fullEnergy = setTimeout(() => {
-  //     setTotalEnergy((prevEnergy) => (prevEnergy < maxEnergy ? prevEnergy + 1 : maxEnergy))
-  //   }, 2000)
-  //   return () => clearTimeout(fullEnergy);
-  // }, [totalEnergy])
 
   return (
     <div
       className="mushroom-logo"
-      onClick={handleClick}
+      onClick={(e) => handleClick(e)}
       style={{
         transform: `scale(${scale})`,
         transition: "transform 0.1s ease-out",
@@ -101,6 +98,6 @@ const Mushroom = observer(() => {
       <div className="mushroom-foot"></div>
     </div>
   );
-})
+});
 
-export default Mushroom
+export default Mushroom;
