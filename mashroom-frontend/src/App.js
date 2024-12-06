@@ -3,6 +3,10 @@ import "./App.css";
 import Main from "./Pages/Main/Main";
 import { store } from "./Store/store";
 import axios from "axios";
+import { Route, Routes } from 'react-router-dom';
+import NavBar from "./Components/NavBar/NavBar";
+import Friends from "./Pages/Friends/Friends";
+
 
 const TG = window.Telegram.WebApp;
 //const GET_USER_URL = 'http://localhost:3001/getUse?tgUserUuid=';
@@ -52,7 +56,14 @@ function App() {
 
   return (
     <div className="App">
-      <Main />
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/friends" element={<Friends />} />
+        {/* <Route path="/tasks"  element={<Tasks/>}/> */}
+        {/* <Route path="/addons"  element={<Addons/>}/> */}
+        {/* <Route path="/airdrop"  element={<Airdrop/>}/> */}
+      </Routes>
     </div>
   );
 }
