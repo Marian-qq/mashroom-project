@@ -1,0 +1,41 @@
+.invite-page {
+    height: 100vh;
+    background: linear-gradient(0deg, rgba(40,195,34,1) 25%, rgba(136,224,17,1) 71%);
+    background-size: cover;
+}
+
+.invite-page h1 {
+    color: #fcfcfc;
+    font-size: 40px;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    padding-top: 30px;
+    text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.9);
+}
+
+.link-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    bottom: 100px;
+}
+
+.share-btn {
+    width: 70%;
+    height: 60px;
+    background-color: #d8ef0aef;
+    border: 1px solid #d8ef0aef;
+    border-radius: 20px;
+    color: #6b96f4;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.copy-btn {
+    width: 20%;
+    height: 60px;
+    background-color: #d8ef0aef;
+    border: 1px solid #d8ef0aef;
+    border-radius: 20px;
+}
