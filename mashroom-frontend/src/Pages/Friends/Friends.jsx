@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { store } from "../../Store/store";
+import { observer } from "mobx-react";
 import "./Friends.css";
 import copyIcon from "../../Images/copy-icon.png";
 import checkIcon from "../../Images/check-icon.png";
 
-const Friends = () => {
+const Friends = observer(() => {
   const [copyStatus, setCopyStatus] = useState(false);
   // const [refsList, setRefsList] = useState([]);
 
-  const referralLink = `https://t.me/qq_doggy_bot?startapp=${store.user.tgId}`;
+  const referralLink = `https://t.me/qq_doggy_bot?startapp=${store.user.tg_id}`;
   // const refs = [
   //   { name: "John", coins: "10000" },
   //   { name: "John", coins: "10000" },
@@ -84,6 +85,6 @@ const Friends = () => {
 
     </div>
   );
-};
+});
 
 export default Friends;
