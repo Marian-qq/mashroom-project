@@ -6,6 +6,7 @@ import axios from "axios";
 import { Route, Routes } from 'react-router-dom';
 import NavBar from "./Components/NavBar/NavBar";
 import Friends from "./Pages/Friends/Friends";
+import Addons from "./Pages/Addons/Addons";
 
 
 const TG = window.Telegram.WebApp;
@@ -61,7 +62,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/friends" element={<Friends />} />
         {/* <Route path="/tasks"  element={<Tasks/>}/> */}
-        {/* <Route path="/addons"  element={<Addons/>}/> */}
+        <Route path="/addons"  element={<Addons/>}/>
         {/* <Route path="/airdrop"  element={<Airdrop/>}/> */}
       </Routes>
     </div>
