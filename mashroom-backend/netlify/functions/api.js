@@ -36,11 +36,14 @@ router.post("/addCoins", async (req, res) => {
 });
 
 router.post("/generateInvoice", async (req, res) => {
-    const title = "Buy Coins";
-    const description = "Buy coins";
+    const data = req.body;
+    const energy = data.energy;
+
+    const title = `+ ${energy} Energy`;
+    const description = `Buy Energy`;
     const payload = "{}";
     const currency = "XTR";
-    const prices = [{ amount: 1, label: "Stars" }];
+    const prices = [{ amount: energy, label: "Energy" }];
   
     const invoiceLink = await bot.api.createInvoiceLink(
       title,
