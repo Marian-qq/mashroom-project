@@ -78,7 +78,7 @@ const Mushroom = observer(() => {
       onClick={(e) => handleClick(e)}
       style={{
         transform: `scale(${scale})`,
-        transition: "transform 0.1s ease-out",
+        transition: "transform 0.3s ease-out",
       }}
     >
       <div className="mushroom-head">
