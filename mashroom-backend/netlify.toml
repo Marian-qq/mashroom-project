@@ -2,4 +2,5 @@
   functions = "netlify/functions"
 [functions]
   node_bundler = "esbuild"
-  included_files = ["src/db.js", ".env"]
+  included_files = ["src/db.js"]
+  external_node_modules = ["grammy"]

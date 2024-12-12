@@ -3,8 +3,9 @@ import getConnection from '../../src/db.js'
 import crypto from 'crypto';
 import cors from 'cors';
 import express, { Router } from 'express';
-import serverless from "serverless-http";
+import serverless from 'serverless-http';
 import bodyParser from 'body-parser';
+import { Bot } from 'grammy';
 
 const api = express();
 const router = Router();
@@ -20,16 +21,40 @@ api.use(cors(corsOptions));
 api.use(bodyParser.json());
 api.use(bodyParser.urlencoded({ extended: true }));
 
-router.get("/getUser", (req, res) => {
+const bot = new Bot('7934830610:AAFscp1fRQx3mkOKBmRFmITKDJN7PSGEYEE');
+
+router.get("/getUser", async (req, res) => {
     return getUser(req, res);
 });
 
-router.post("/createUser", (req, res) => {
+router.post("/createUser", async (req, res) => {
     return createUser(req, res);
 });
 
-router.post("/addCoins", (req, res) => {
+router.post("/addCoins", async (req, res) => {
     return addCoins(req, res);
+});
+
+router.post("/generateInvoice", async (req, res) => {
+    const data = req.body;
+    const energy = data.energy;
+
+    const title = `+ ${energy} Energy`;
+    const description = `Buy Energy`;
+    const payload = "{}";
+    const currency = "XTR";
+    const prices = [{ amount: energy, label: "Energy" }];
+  
+    const invoiceLink = await bot.api.createInvoiceLink(
+      title,
+      description,
+      payload,
+      "", // Provider token must be empty for Telegram Stars
+      currency,
+      prices,
+    );
+  
+    res.json({ invoiceLink });
 });
 
 const getUser = async (req, res) => {
