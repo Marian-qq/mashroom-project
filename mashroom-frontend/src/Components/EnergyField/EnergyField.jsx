@@ -5,14 +5,14 @@ import energyIcon from "../../Images/energy-icon.png";
 import "./EnergyField.css";
 
 const EnergyField = observer(() => {
-  const maxEnergy = 15;
-  const totalEnergy = store.totalEnergy || 0;
-  const energyPercentage = (totalEnergy / maxEnergy) * 100;
+  const maxEnergy = store.maxEnergy ;
+  const currentEnergy = store.currentEnergy || 0;
+  const energyPercentage = (currentEnergy / maxEnergy) * 100;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (store.totalEnergy < maxEnergy) {
-        store.increaseTotalEnergy();
+      if (store.currentEnergy < store.maxEnergy) {
+        store.increaseCurrentEnergy();
       }
     }, 3000);
 
@@ -26,9 +26,9 @@ const EnergyField = observer(() => {
         style={{
           width: `${energyPercentage}%`,
           backgroundColor:
-            totalEnergy === maxEnergy || totalEnergy > 10
+            currentEnergy === maxEnergy || currentEnergy > 10
               ? "#dbd10d"
-              : totalEnergy > 4
+              : currentEnergy > 4
               ? "#e6870b"
               : "#c71010"
         }}
@@ -36,7 +36,7 @@ const EnergyField = observer(() => {
       <div className="energy-field-attempts">
         <img src={energyIcon} alt="energy-icon.png" />
         <span>
-          {totalEnergy}/{maxEnergy}
+          {currentEnergy}/{maxEnergy}
         </span>
       </div>
     </div>

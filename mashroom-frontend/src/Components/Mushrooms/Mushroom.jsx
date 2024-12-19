@@ -16,12 +16,12 @@ const Mushroom = observer(() => {
   const handleClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    if (store.totalEnergy > 0) {
+    if (store.currentEnergy > 0) {
       setIsClicked(true);
       setScale((prevScale) => prevScale + 0.05); // increasing mushroom size
       setTapsToRequest(tapsToRequest + 1);
       store.setTotalEarnedCoins();
-      store.decreaseTotalEnergy();
+      store.decreaseCurrentEnergy();
 
       // retrieving clicks coordinates
       const boundingRect = e.currentTarget.getBoundingClientRect();

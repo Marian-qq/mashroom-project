@@ -57,6 +57,22 @@ router.post("/generateInvoice", async (req, res) => {
     res.json({ invoiceLink });
 });
 
+router.post("/addEnergy", async (req, res) => {
+    const tgId = req.query.tgId;
+
+    const data = req.body;
+    const energyEmount = data.energy;
+
+    const sql = `UPDATE user SET energy = energy + ${energyEmount} WHERE tg_id = ?`;
+    
+    const connection = await getConnection();
+    await connection.query(sql, [tgId]);
+
+    if (connection) connection.release();
+    
+    return getUser(req, res);
+});
+
 const getUser = async (req, res) => {
     const tgId = req.query.tgId;
 
@@ -74,17 +90,17 @@ const createUser = async (req, res) => {
     const data = req.body;
 
     const tgId = data.tgId;
-    const tgUuid = crypto.randomUUID();
     const name = data.tgUserName;;
 
     const uuid = crypto.randomUUID();
-    const coins = 10000;
+    const coins = 100;
+    const energy = 25;
     const createdAt = new Date();
     const updatedAt = createdAt;
 
-    const sql = "INSERT INTO user (uuid, tg_id, tg_uuid, name, coins, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    const sql = "INSERT INTO user (uuid, tg_id, name, coins, energy, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const connection = await getConnection();
-    await connection.query(sql, [uuid, tgId, tgUuid, name, coins, createdAt, updatedAt]);
+    await connection.query(sql, [uuid, tgId, name, coins, energy, createdAt, updatedAt]);
 
     if (connection) connection.release();
     
@@ -94,7 +110,7 @@ const createUser = async (req, res) => {
 const addCoins = async (req, res) => {
     const tgId = req.query.tgId;
     
-    const sql = "UPDATE user SET coins = coins + 1 WHERE tg_id = ?";
+    const sql = "UPDATE user SET coins = coins + 5 WHERE tg_id = ?";
     
     const connection = await getConnection();
     await connection.query(sql, [tgId]);
