@@ -9,7 +9,7 @@ const Friends = observer(() => {
   const [copyStatus, setCopyStatus] = useState(false);
   // const [refsList, setRefsList] = useState([]);
 
-  const referralLink = `https://t.me/qq_doggy_bot?startapp=${store.user.tg_id}`;
+  const referralLink = `https://t.me/qq_doggy_bot/mashroom?startapp=${store.user.tg_id}`;
   const refs = [
     { name: "John", coins: "10000" },
     { name: "John", coins: "10000" },
