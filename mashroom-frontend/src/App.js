@@ -40,6 +40,7 @@ function App() {
         await axios.post(`${CREATE_USER_URL}`, {
           tgUserName: tgUser.user.username,
           tgId: tgUser.user.id,
+          referralId: tgUser.start_param
         });
 
         const getUserResponse = await axios.get(

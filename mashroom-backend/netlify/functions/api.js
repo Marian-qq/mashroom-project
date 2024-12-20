@@ -90,19 +90,26 @@ const createUser = async (req, res) => {
     const data = req.body;
 
     const tgId = data.tgId;
-    const name = data.tgUserName;;
+    const name = data.tgUserName;
 
     const uuid = crypto.randomUUID();
-    const coins = 100;
+    
     const energy = 25;
     const createdAt = new Date();
     const updatedAt = createdAt;
+
+    const referralId = data.referralId;
+    const coins = referralId ? 150 : 100;
 
     const sql = "INSERT INTO user (uuid, tg_id, name, coins, energy, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const connection = await getConnection();
     await connection.query(sql, [uuid, tgId, name, coins, energy, createdAt, updatedAt]);
 
     if (connection) connection.release();
+
+    if (referralId && referralId !== tgId) {
+        addCoinsForReferral(referralId);
+    }
     
     return res.status(201).json({ message: "User has been created" });
 };
@@ -118,6 +125,15 @@ const addCoins = async (req, res) => {
     if (connection) connection.release();
     
     return getUser(req, res);
+};
+
+const addCoinsForReferral = async (referralTgId) => {
+    const sql = "UPDATE user SET coins = coins + 50 WHERE tg_id = ?";
+    
+    const connection = await getConnection();
+    await connection.query(sql, [referralTgId]);
+
+    if (connection) connection.release();
 };
 
 api.use("/.netlify/functions/api", router);
