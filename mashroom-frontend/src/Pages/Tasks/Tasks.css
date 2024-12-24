@@ -1,0 +1,138 @@
+.tasks-page {
+    height: 100vh;
+    background: linear-gradient(0deg, rgba(40,195,34,1) 25%, rgba(136,224,17,1) 71%);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.nav-btns {
+    width: 80%;
+    height: 70px;
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btns div {
+    width: 80%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.tasks-btn, .checkin-btn {
+    width: 45%;
+    height: 35px;
+    margin: 3px;
+    border: none;
+    border-radius: 5px;
+}
+
+.tasks {
+    width: 90%;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.task {
+    width: 95%;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(179 175 175);
+    font-size: 14px;
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 15% 60% 25%;
+}
+
+.task > img {
+    width: 35px;
+    height: 35px;
+}
+
+.task p {
+    margin: auto 0;
+    text-align: start;
+}
+
+.task div {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.task div img {
+    width: 15px;
+    height: 15px;
+}
+
+.task div button {
+    border-radius: 5px;
+    background-color: rgb(84, 84, 215);
+    color: azure;
+    font-size: 10px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.daily-rewards {
+    width: 90%;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.reward {
+    width: 60px;
+    height: 60px;
+    background-color: #69b1b17d;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1 0 calc(15%); 
+}
+
+.reward p {
+    margin: 0 0 5px 0;
+}
+
+.reward div {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reward div img {
+    width: 15px;
+    height: 15px;
+    padding-top: 2px;
+}
+
+.claim-btn{
+    width: 60%;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(84, 84, 215);
+    color: azure;
+    font-size: 10px;
+    margin: 5px;
+    padding: 5px;
+}

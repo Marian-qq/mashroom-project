@@ -32,6 +32,7 @@
     height: 290px;
     margin-bottom: 20px;
     overflow: scroll;
+    scrollbar-width: none;
 }
 
 .friends-list div {
