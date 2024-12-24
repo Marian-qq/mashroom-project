@@ -2,17 +2,19 @@ import { action, makeObservable, observable } from "mobx"
 
 class Store {
     totalEarnedCoins = 0;
-    totalEnergy = 15;
+    currentEnergy = 0;
+    maxEnergy = 0;
     user = {};
 
     constructor() {
         makeObservable(this, {
             totalEarnedCoins: observable,
-            totalEnergy: observable,
+            currentEnergy: observable,
+            maxEnergy: observable,
             user: observable,
             setTotalEarnedCoins: action,
-            decreaseTotalEnergy: action,
-            increaseTotalEnergy: action,
+            decreaseCurrentEnergy: action,
+            increaseCurrentEnergy: action,
             setUser: action,
         })
     }
@@ -21,15 +23,17 @@ class Store {
     setTotalEarnedCoins = () => {
         this.totalEarnedCoins += 1
     };
-    decreaseTotalEnergy = () => {
-        this.totalEnergy -= 1
+    decreaseCurrentEnergy = () => {
+        this.currentEnergy -= 1
     }
-    increaseTotalEnergy = () => {
-        this.totalEnergy += 1
+    increaseCurrentEnergy = () => {
+        this.currentEnergy += 1
     }
     setUser = (user) => {
         this.user = user;
         this.totalEarnedCoins = user.coins;
+        this.currentEnergy = user.energy;
+        this.maxEnergy = user.energy;
     }
 
 }

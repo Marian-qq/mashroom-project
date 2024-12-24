@@ -1,23 +1,27 @@
 import React from 'react';
 import axios from "axios";
+import { store } from "../../Store/store";
 
 import "./Addons.css";
 import Star from "./Star";
 
 const TG = window.Telegram.WebApp;
 const INVOICE_URL = 'https://lovely-cactus-a12d45.netlify.app/.netlify/functions/api/generateInvoice';
+const ADD_ENERGY_URL = `https://lovely-cactus-a12d45.netlify.app/.netlify/functions/api/addEnergy?tgId=${store.user.tg_id}`;
 
 const Addons = () => {
 
   const buyEnergy = async (energyAmount) => {
-    axios.post(`${INVOICE_URL}`, {
+    await axios.post(`${INVOICE_URL}`, {
       energy: energyAmount,
     }).then(response => {
         console.log(response);
         TG.openInvoice(response.data.invoiceLink, (status) => {
             console.log(status);
             if (status === "paid") {
-                console.log('Invoice paid!');
+              axios.post(`${ADD_ENERGY_URL}`, {
+                energy: energyAmount,
+              })
             }
         });
     });
@@ -25,27 +29,35 @@ const Addons = () => {
 
   return (
     <>
-      <div class="Dfsfef4f">
-        <div class="F5BTkZ9G" onClick={() => buyEnergy(5)}>
+      <div className="addons-container">
+        <h1>Boost your energy</h1>
+        <div className="buy-energy-block" onClick={() => buyEnergy(5)}>
           +5 Energy
-          <i class="qEhgJEpm GjxPnwZR">
+          <i className="buy-energy-item">
             <Star />
           </i>
             5
         </div>
-        <div class="F5BTkZ9G" onClick={() => buyEnergy(10)}>
+        <div className="buy-energy-block" onClick={() => buyEnergy(10)}>
           +10 Energy
-          <i class="qEhgJEpm GjxPnwZR">
+          <i className="buy-energy-item">
             <Star />
           </i>
             10
         </div>
-        <div class="F5BTkZ9G" onClick={() => buyEnergy(15)}>
+        <div className="buy-energy-block" onClick={() => buyEnergy(15)}>
           +15 Energy
-          <i class="qEhgJEpm GjxPnwZR">
+          <i className="buy-energy-item">
             <Star />
           </i>
             15
+        </div>
+        <div className="buy-energy-block" onClick={() => buyEnergy(20)}>
+          +20 Energy
+          <i className="buy-energy-item">
+            <Star />
+          </i>
+            20
         </div>
       </div>
     </>

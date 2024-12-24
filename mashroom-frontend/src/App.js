@@ -18,7 +18,6 @@ const GET_USER_URL = 'https://lovely-cactus-a12d45.netlify.app/.netlify/function
 const CREATE_USER_URL = 'https://lovely-cactus-a12d45.netlify.app/.netlify/functions/api/createUser';
 
 function App() {
-  const [user, setUser] = useState({});
   const [tgUser, setTgUser] = useState({});
 
   useEffect(() => {
@@ -37,18 +36,17 @@ function App() {
         `${GET_USER_URL}${tgUser.user.id}`
       );
       if (response.data && response.data.content) {
-        setUser(response.data.content);
         store.setUser(response.data.content);
       } else {
         await axios.post(`${CREATE_USER_URL}`, {
           tgUserName: tgUser.user.username,
           tgId: tgUser.user.id,
+          referralId: tgUser.start_param
         });
 
         const getUserResponse = await axios.get(
           `${GET_USER_URL}${tgUser.user.id}`
         );
-        setUser(getUserResponse.data.content);
         store.setUser(getUserResponse.data.content);
       }
     } catch (err) {
