@@ -6,7 +6,8 @@
     flex-direction: column;
     margin: 0;
     padding: 0;
-    background-image: url('../../Images/main-BG.png');
+    /* background-image: url('../../Images/main-BG.png'); */
+    background-image: url('../../Images/BG-1.png');
     background-size: cover;
     background-position: center;
   }

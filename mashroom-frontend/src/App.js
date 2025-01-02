@@ -8,6 +8,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import Friends from "./Pages/Friends/Friends";
 import Addons from "./Pages/Addons/Addons";
 import Tasks from "./Pages/Tasks/Tasks";
+import Airdrop from "./Pages/Airdrop/Airdrop";
 
 
 const TG = window.Telegram.WebApp;
@@ -62,7 +63,7 @@ function App() {
         <Route path="/friends" element={<Friends />} />
         <Route path="/tasks"  element={<Tasks/>}/>
         <Route path="/addons"  element={<Addons/>}/>
-        {/* <Route path="/airdrop"  element={<Airdrop/>}/> */}
+        <Route path="/airdrop"  element={<Airdrop/>}/>
       </Routes>
     </div>
   );
