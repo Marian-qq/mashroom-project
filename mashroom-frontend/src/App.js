@@ -8,6 +8,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import Friends from "./Pages/Friends/Friends";
 import Addons from "./Pages/Addons/Addons";
 import Tasks from "./Pages/Tasks/Tasks";
+import Airdrop from "./Pages/Airdrop/Airdrop";
 import {QRCodeSVG } from "qrcode.react";
 
 const TG = window.Telegram.WebApp;

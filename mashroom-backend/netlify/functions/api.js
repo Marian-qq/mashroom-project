@@ -108,7 +108,7 @@ const createUser = async (req, res) => {
     if (connection) connection.release();
 
     if (referralId && referralId !== tgId) {
-        addCoinsForReferral(referralId);
+        addCoinsForReferral(referralId, tgId);
     }
     
     return res.status(201).json({ message: "User has been created" });
@@ -127,11 +127,15 @@ const addCoins = async (req, res) => {
     return getUser(req, res);
 };
 
-const addCoinsForReferral = async (referralTgId) => {
-    const sql = "UPDATE user SET coins = coins + 50 WHERE tg_id = ?";
+const addCoinsForReferral = async (referralTgUserId, tgUserId) => {
+    const sql1 = "UPDATE user SET coins = coins + 50 WHERE tg_id = ? ;";
+    const sql2 = "INSERT INTO referral(invite_sent_tg_id, invite_received_tg_id, created_at, updated_at) VALUES (?, ?, ?, ?)";
+
+    const createdAt = new Date();
+    const updatedAt = createdAt;
     
     const connection = await getConnection();
-    await connection.query(sql, [referralTgId]);
+    await connection.query(sql1 + sql2, [referralTgUserId, referralTgUserId, tgUserId, createdAt, updatedAt]);
 
     if (connection) connection.release();
 };
