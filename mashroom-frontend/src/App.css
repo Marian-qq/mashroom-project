@@ -9,3 +9,21 @@ body {
   text-align: center;
 }
 
+.qrcode-container {
+  height: 100vh;
+  /* background: linear-gradient(0deg, rgba(40,195,34,1) 25%, rgba(136,224,17,1) 71%); */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+.qrcode-container h2{
+  margin: 0 15px;
+}
+
+.qrcode-container img {
+  width: 100px;
+  height: 100px;
+}
+

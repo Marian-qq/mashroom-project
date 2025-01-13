@@ -10,6 +10,7 @@ import Addons from "./Pages/Addons/Addons";
 import Tasks from "./Pages/Tasks/Tasks";
 import Airdrop from "./Pages/Airdrop/Airdrop";
 import {QRCodeSVG } from "qrcode.react";
+import mushroomLogo from "./Images/mushroom-qrcode-logo.png";
 
 const TG = window.Telegram.WebApp;
 //const GET_USER_URL = 'http://localhost:3001/getUse?tgUserUuid=';
@@ -79,10 +80,12 @@ function App() {
           </Routes>
         </>
       ) : (
-        <>
-          <h2>Please scan the QR-code for using on your mobile:</h2>
-          <QRCodeSVG value={mobileAppLink} size={256} />
-        </>
+        <div className="qrcode-container">
+          <h2>Scan the QR-code for using on your mobile:</h2>
+          <QRCodeSVG value={mobileAppLink} size={256}  marginSize={2}/>
+          <p>{mobileAppLink}</p>
+          <img src={mushroomLogo} alt=".png" /> 
+        </div>
       )}
     </div>
   );

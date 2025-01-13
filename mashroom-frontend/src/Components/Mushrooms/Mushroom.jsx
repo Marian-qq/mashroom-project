@@ -3,6 +3,7 @@ import "./Mushroom.css";
 import { store } from "../../Store/store";
 import { observer } from "mobx-react";
 import axios from "axios";
+import mushroomLogo from "../../Images/mushroom.png";
 
 const ADD_COINS_URL = "https://lovely-cactus-a12d45.netlify.app/.netlify/functions/api/addCoins?tgId=";
 const tapsToRequestAmount = 5;
@@ -18,7 +19,7 @@ const Mushroom = observer(() => {
     e.preventDefault();
     if (store.currentEnergy > 0) {
       setIsClicked(true);
-      setScale((prevScale) => prevScale + 0.05); // increasing mushroom size
+      setScale((prevScale) => prevScale + 0.03); // increasing mushroom size
       setTapsToRequest(tapsToRequest + 1);
       store.setTotalEarnedCoins();
       store.decreaseCurrentEnergy();
@@ -66,7 +67,7 @@ const Mushroom = observer(() => {
     if (isClicked) {
       const clickResetTimer = setTimeout(() => {
         setIsClicked(false);
-      }, 300);
+      }, 100);
 
       return () => clearTimeout(clickResetTimer);
     }
@@ -75,27 +76,25 @@ const Mushroom = observer(() => {
   return (
     <div
       className="mushroom-logo"
-      onClick={(e) => handleClick(e)}
+      onTouchStart={(e) => handleClick(e)}
       style={{
         transform: `scale(${scale})`,
         transition: "transform 0.3s ease-out",
+        backgroundImage: `url(${mushroomLogo})`,
       }}
     >
-      <div className="mushroom-head">
-        {clicks.map((click) => (
-          <span
-            key={click.id}
-            className="click-number"
-            style={{
-              left: `${click.x - 10}px`,
-              top: `${click.y - 10}px`,
-            }}
-          >
-            {click.value}
-          </span>
-        ))}
-      </div>
-      <div className="mushroom-foot"></div>
+      {clicks.map((click) => (
+        <span
+          key={click.id}
+          className="click-number"
+          style={{
+            left: `${click.x}px`,
+            top: `${click.y}px`,
+          }}
+        >
+          {click.value}
+        </span>
+      ))}
     </div>
   );
 });
