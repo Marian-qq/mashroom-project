@@ -1,13 +1,13 @@
 .main-page{
     height: 100vh;
-    display: flex;
+    display: grid;
+    grid-template-rows: 20% 50% 20%;
     align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
+    justify-items: center;
     margin: 0;
     padding: 0;
-    /* background-image: url('../../Images/main-BG.png'); */
-    background-image: url('../../Images/BG-1.png');
+    background-image: url('../../Images/main-BG1.png');
+    /* background-image: url('../../Images/BG-1.png'); */
     background-size: cover;
     background-position: center;
   }

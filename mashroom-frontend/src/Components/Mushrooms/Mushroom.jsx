@@ -78,8 +78,7 @@ const Mushroom = observer(() => {
       className="mushroom-logo"
       onTouchStart={(e) => handleClick(e)}
       style={{
-        transform: `scale(${scale})`,
-        transition: "transform 0.3s ease-out",
+        transform: `scale(${scale})`,        
         backgroundImage: `url(${mushroomLogo})`,
       }}
     >

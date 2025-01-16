@@ -4,6 +4,7 @@
     background-color: #ccc;
     border-radius: 10px;
     position: relative;
+    z-index: 2;
 }
 
 .energy-field-percentage {
